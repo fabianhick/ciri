@@ -36,14 +36,14 @@ def _ciri_eng(args, input_path: str, output_path: str, model=None, tokenizer=Non
 	print("[Ciri] Start")
 	print(f"[Ciri] Running for file {input_path}")
 	logger.debug(f"[Ciri] Running for file {input_path}")
-	input_file_content = Path(input_path).read_text()
+	input_file_content = ""
 	logger.debug(f"[Ciri] Input file content:\n{input_file_content}")
 	if args.validconfig_shot_num + args.misconfig_shot_num > 0:
 		shot_content = ShotSelection(
 			args,
 			input_file_content,
 		).select()
-		input_file_content = shot_content + input_file_content
+		input_file_content = shot_content
 	logger.debug(f"[Ciri] Shot+File to be queried:\n{input_file_content}")
 	config_file_content = Path(input_path).read_text()
 	if args.read_code:
